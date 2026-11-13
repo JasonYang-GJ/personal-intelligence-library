@@ -1,0 +1,36 @@
+# Local library data and all generated / captured content are private.
+/data/
+/.intake/
+/evidence/
+/.publish/
+/个人情报库.html
+/.codex/
+/.agents/
+/.aws/
+
+# Credentials, browser profiles, local dependencies and caches.
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+*credentials*.json
+*cookies*.json
+*storage-state*.json
+*auth-state*.json
+*profile*/
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.log
+*.sqlite*
+*.db
+*.zip
+*.exe
+*.dll
+Thumbs.db
+.DS_Store

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "library_name": "个人情报库",
+  "updated_at": "2000-01-01",
+  "categories": [
+    {"id": "ai-models", "label": "AI模型新发布", "short_label": "AI 模型", "description": "记录模型变化、实际用途与使用条件。", "focus": "区分已知能力与待验证结论，保留使用条件。"},
+    {"id": "ai-products", "label": "AI产品机会雷达", "short_label": "AI 产品", "description": "整理 AI 产品线索与可以验证的需求。", "focus": "保留目标用户、证据局限与最小验证动作。"},
+    {"id": "platform-income", "label": "平台变现机会雷达", "short_label": "平台机会", "description": "整理平台规则、资格条件与成本。", "focus": "保留资格、地区与费用限制，不把机会描述为已验证收入。"},
+    {"id": "user-pains", "label": "真实用户痛点雷达", "short_label": "用户痛点", "description": "记录用户问题、原始证据与验证思路。", "focus": "保留目标用户、问题情境、证据局限与验证动作。"},
+    {"id": "solo-business", "label": "个人创业机会雷达", "short_label": "个人创业", "description": "整理个人可尝试的产品与服务方向。", "focus": "保留资源要求、成本、未知条件与下一步。"},
+    {"id": "cross-border", "label": "跨境电商入场雷达", "short_label": "跨境电商", "description": "整理跨境业务的条件、限制与验证线索。", "focus": "保留地区、平台、合规与成本条件，缺失事实标为未知。"}
+  ],
+  "records": [],
+  "weekly_reviews": []
+}

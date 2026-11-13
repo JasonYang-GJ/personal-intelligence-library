@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "个人情报库后台读取验证",
+  "version": "0.1.2",
+  "description": "后台读取器源码模板；示例来源需自行配置，默认不启用采集。",
+  "minimum_chrome_version": "150",
+  "permissions": [
+    "scripting",
+    "storage",
+    "alarms",
+    "background",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*"
+  ],
+  "background": {
+    "type": "module",
+    "service_worker": "worker.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "个人情报库读取验证"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "early-guard.js"
+      ],
+      "matches": [
+        "https://chatgpt.com/c/00000000-0000-4000-8000-000000000010*",
+        "https://chatgpt.com/c/00000000-0000-4000-8000-000000000008*",
+        "https://chatgpt.com/c/00000000-0000-4000-8000-000000000009*",
+        "https://chatgpt.com/c/00000000-0000-4000-8000-000000000007*",
+        "https://chatgpt.com/c/00000000-0000-4000-8000-000000000011*",
+        "https://chatgpt.com/c/00000000-0000-4000-8000-000000000012*"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}

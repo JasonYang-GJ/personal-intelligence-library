@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <title>个人情报库</title>
+  <style>{{STYLES}}</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到情报列表</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="情报分类">
+      <a class="brand" href="#" id="brand-home" aria-label="个人情报库，查看全部情报">
+        <svg class="brand-mark" width="37" height="40" viewBox="0 0 37 40" fill="none" aria-hidden="true"><path d="M7 8.5h24v26H7z" stroke="currentColor" stroke-width="1.7"/><path d="M3 3.5h24M3 3.5v26M7 21.5h24M16 15h6M16 28h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span>个人情报库<span class="brand-caption">让每次发现，都有处可寻</span></span>
+      </a>
+      <nav id="category-nav" class="category-nav" aria-label="选择栏目"></nav>
+      <div class="sidebar-note">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <div><strong>资料保存在本机</strong><p>阅读和搜索无需联网。<br>点击来源链接才访问外部网站。</p></div>
+      </div>
+    </aside>
+    <main id="main" class="main" tabindex="-1">
+      <header class="topbar">
+        <span class="collection-info" id="collection-info">正在读取本地资料…</span>
+        <div class="topbar-actions"><button class="text-button" id="how-to-add" type="button">收录说明</button><button class="button button-primary" id="manual-intake" type="button" aria-describedby="manual-intake-message"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span id="manual-intake-label">手动收录</span></button></div>
+      </header>
+      <section id="management-panel" class="management-panel" aria-label="归档与回收站保存状态">
+        <p id="management-status" class="management-status" role="status" aria-live="polite" aria-atomic="true">当前显示上次生成的阅读快照。连接资料文件夹后，可保存归档和回收站操作。</p>
+        <div class="management-connect-actions"><button id="connect-library" class="button button-secondary" type="button">连接资料文件夹</button><button id="refresh-management" class="text-button" type="button" hidden>刷新管理状态</button></div>
+      </section>
+      <section id="manual-intake-panel" class="manual-intake-panel" aria-label="手动收录状态">
+        <div><small id="intake-mode">仅手动模式 · 不自动补收</small><p id="manual-intake-message" role="status" aria-live="polite" aria-atomic="true">当前为仅手动收录，不再每天或开机自动运行。需要时请打开已登录 ChatGPT 的 Chrome，点击“手动收录”；通常在 2 分钟内开始，失败后由你决定是否重试。</p><p id="manual-intake-summary" hidden></p><small id="manual-intake-time" hidden></small></div>
+        <div class="manual-intake-actions"><button class="text-button" id="refresh-intake" type="button">检查收录状态</button><button class="button button-secondary" id="reload-library" type="button" hidden>刷新首页查看结果</button></div>
+      </section>
+      <aside id="intake-status" class="intake-status" aria-label="上次收录结果" hidden></aside>
+      <section class="heading-section" aria-labelledby="page-title">
+        <h1 id="page-title">全部情报</h1>
+        <p id="page-description">先看简明结论，再决定下一步。</p>
+      </section>
+      <section class="search-section" aria-label="搜索和筛选情报">
+        <div class="search-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <label class="sr-only" for="search-input">搜索标题、摘要、来源或完整原文</label>
+          <input id="search-input" type="search" autocomplete="off" placeholder="搜索发现、关键词或原文内容" aria-describedby="search-hint">
+          <span class="search-hint-key" aria-hidden="true">全文搜索</span>
+        </div>
+        <div class="filter-row">
+          <div class="filter-field" id="recommendation-field"><label for="recommendation-filter">建议</label><select id="recommendation-filter"><option value="">全部建议</option><option>值得尝试</option><option>继续观察</option><option>暂不考虑</option></select></div>
+          <div class="filter-field" id="progress-field"><label for="status-filter">进度</label><select id="status-filter"><option value="">全部进度</option><option>待验证</option><option>验证中</option><option>准备做</option><option>搁置</option></select></div>
+          <button class="text-button clear-filters" id="clear-filters" type="button" hidden>清除筛选</button>
+        </div>
+        <p class="sr-only" id="search-hint">搜索包含完整原文；多个词用空格分开，会同时匹配。</p>
+      </section>
+      <section class="results-section" aria-label="情报列表">
+        <div class="results-heading"><p id="result-count" role="status" aria-live="polite"></p><span>按收录日期排列</span></div>
+        <div id="record-list" class="record-list"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M7 14h12l4 5h18v20H7V14Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 10h26v9M17 28h14M17 33h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <h2 id="empty-title">还没有收录情报</h2><p id="empty-description"></p><button class="button button-secondary" type="button" id="empty-action">如何收录</button>
+        </div>
+      </section>
+      <footer class="page-footer"><span>原文完整保留 · 建议与事实分开查看</span><span id="updated-date"></span></footer>
+      <noscript><div class="fatal-error">此首页需要浏览器启用 JavaScript 才能搜索和查看卡片。完整原文仍保存在项目的原文目录中。</div></noscript>
+    </main>
+  </div>
+  <dialog id="record-dialog" class="dialog record-dialog" aria-labelledby="detail-title">
+    <div class="dialog-header"><span class="dialog-context" id="detail-context"></span><button class="icon-button dialog-close" type="button" aria-label="关闭详情"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div>
+    <div class="detail-title-block"><button id="detail-back" class="text-button" type="button" hidden>返回上一条</button><h2 id="detail-title"></h2><p id="detail-meta"></p></div>
+    <section class="detail-management" aria-label="管理这份资料"><p id="detail-placement"></p><div id="detail-management-actions" class="management-actions"></div><button id="detail-connect-library" class="text-button" type="button">连接资料文件夹</button><p id="detail-management-status" class="management-status" role="status" aria-live="polite" aria-atomic="true"></p></section>
+    <div class="detail-tabs" role="tablist" aria-label="详情内容"><button id="summary-tab" role="tab" aria-selected="true" aria-controls="summary-panel" type="button">简明详情</button><button id="original-tab" role="tab" aria-selected="false" aria-controls="original-panel" tabindex="-1" type="button">完整原文</button></div>
+    <div id="summary-panel" class="detail-panel" role="tabpanel" aria-labelledby="summary-tab" tabindex="0"><div id="detail-content"></div></div>
+    <div id="original-panel" class="detail-panel" role="tabpanel" aria-labelledby="original-tab" tabindex="0" hidden><div class="original-toolbar"><p>保留报告原貌，原文中的判断不等于已验证事实。</p><button id="download-original" class="button button-secondary" type="button">下载原文</button></div><pre id="original-text" class="original-text"></pre></div>
+  </dialog>
+  <dialog id="help-dialog" class="dialog help-dialog" aria-labelledby="help-title">
+    <div class="dialog-header"><span class="dialog-context">收录一份新报告</span><button class="icon-button dialog-close" type="button" aria-label="关闭收录说明"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div>
+    <div class="help-content"><h2 id="help-title">自动报告，一键检查收录。</h2><p>首页右上角点击“手动收录”，会直接使用已授权的资料文件夹。首次使用或浏览器遗忘文件夹时才需要选择；若只是访问权限失效，点击浏览器提示中的“允许”即可，无需重新找文件夹。请求保存后，已配置的隐藏检查器通常在两分钟内接手；等待期间无需重复点击。六类旧报告自动去重，完整原文和检查断点沿用原有保护。</p><p>请保持电脑开机、联网，Chrome 中 ChatGPT 已登录且扩展启用。已有收录在运行或故障后等待重试时，页面会显示等待状态。收录需要一些时间；只有收到实际结果才显示完成，随后点击“刷新首页查看结果”。下方“上次已保存结果”是页面生成时的历史记录，不代表本次请求已完成。</p><h3>也可以粘贴其他报告</h3><p>在这个项目的 Codex 聊天中粘贴完整报告，注明它来自哪个自动化，再让 Codex 帮你收录。若后台始终读不到报告，也可使用此方法。</p>
+      <ol class="help-steps"><li><strong>复制完整报告</strong><span>尽量保留标题、日期和来源链接。</span></li><li><strong>在本项目聊天中发送</strong><span>将下面的指令和报告一起粘贴给 Codex。</span></li><li><strong>重新打开这个首页</strong><span>Codex 更新资料后，刷新页面即可看到新卡片。</span></li></ol>
+      <label class="prompt-label" for="intake-prompt">可直接使用的收录指令</label><textarea id="intake-prompt" class="intake-prompt" rows="5" readonly>请将以下报告收录到个人情报库，保留完整原文与来源，生成简明卡片，标注待验证信息；检查可能重复的记录并提示关联，更新首页。
+
+来自自动化：[填写自动化名称]
+报告日期：[已知则填写，未知则留空]
+报告原文：[在这里粘贴完整报告]</textarea>
+      <div class="copy-row"><button class="button button-primary" type="button" id="copy-prompt">复制收录指令</button><span id="copy-feedback" role="status" aria-live="polite"></span></div>
+      <p class="help-note">公开版本默认仅在本地阅读，不启用后台采集。配置个人来源和读取器后，才可使用手动收录。阅读和搜索可离线使用。</p>
+      <p class="help-note">归档和回收站操作需要先连接本项目的资料文件夹，保存结果以页面提示为准。归档会从主列表收起资料；回收站中的资料可以恢复，完整原文仍保留。未连接时显示的是上次生成的阅读快照。</p>
+    </div>
+  </dialog>
+  <script type="application/json" id="library-data">{{DATA}}</script>
+  <script>{{SCRIPT}}</script>
+</body>
+</html>
